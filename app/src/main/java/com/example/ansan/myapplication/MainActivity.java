@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Switch;
 
 public class MainActivity extends AppCompatActivity {
-
+    String TAG="[SDCard]";//검색용도로 이름표 붙여줄려고 //TAG로 찾음
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    String TAG="dd";//검색용도로 이름표 붙여줄려고 //TAG로 찾음
+
     public  boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         }
-
         else { //permission is automatically granted on sdk<23 upon installation
             Log.v(TAG,"Permission is granted");
             return true;
@@ -59,5 +58,4 @@ public class MainActivity extends AppCompatActivity {
             //resume tasks needing this permission
         }
     }
-
 }
