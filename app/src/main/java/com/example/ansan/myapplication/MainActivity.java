@@ -3,12 +3,17 @@ package com.example.ansan.myapplication;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.os.EnvironmentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     String TAG="[SDCard]";//검색용도로 이름표 붙여줄려고 //TAG로 찾음
@@ -19,14 +24,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
+        if(isStoragePermissionGranted() == false){
+            Toast.makeText(getApplicationContext(),"SD Card 사용 불가", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //sd카드는 핸드폰마다 경로가 다름
+        String path= Environment.getExternalStorageDirectory().getAbsolutePath();
+
         switch (v.getId()) {
             case R.id.button:
+                File file = new File(path+"/myPics");
+                file.mkdir();
+                Toast.makeText(getApplicationContext(),"myPics 폴더 생성", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button2:
+                File file2 = new File(path+"/myPics");
+                file2.delete();
+                Toast.makeText(getApplicationContext(),"myPics 폴더 삭제", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button3:
+                File file3 = new File(path+"/myPics");
+                file3.mkdir();
+                Toast.makeText(getApplicationContext(),"myPics 파일 생성", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button4:
+                File file4 = new File(path+"/myPics");
+                file4.delete();
+                Toast.makeText(getApplicationContext(),"myPics 파일 삭제", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
